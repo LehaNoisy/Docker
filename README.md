@@ -1,4 +1,4 @@
-Useful commands: </br>
+<h2>Useful commands: </br></h2>
  docker rm /redis                    - remove container </br>
  docker rmi Image                    - remove image</br>
 
