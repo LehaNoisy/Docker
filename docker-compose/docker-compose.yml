@@ -34,8 +34,16 @@ services:
     container_name: tomcat
     volumes_from:
     - volumetomcat
-
-
+    logging:
+       driver: syslog
+       options:
+         tag: "tomcat"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+  
   nginx:
     build:
       context: .
@@ -47,3 +55,12 @@ services:
     - "127.0.0.1:80:80"
     volumes_from:
     - volumenginx
+    logging:
+      driver: syslog
+      options:
+        tag: "nginx"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000 
