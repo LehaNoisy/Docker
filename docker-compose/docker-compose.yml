@@ -1,0 +1,49 @@
+version: '2'
+
+networks:
+  bridge_task2:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.33.0.0/16 
+
+
+services:
+  volumenginx:
+    build:
+      context: .
+      dockerfile: nginx-volume.Dockerfile
+    networks:
+    - bridge_task2
+
+  volumetomcat:
+    build:
+      context: .
+      dockerfile: tomcat-volume.Dockerfile
+    networks:
+    - bridge_task2
+
+  tomcat1:
+    build:
+      context: .
+      dockerfile: tomcat.Dockerfile
+    networks:
+      bridge_task2:
+        ipv4_address: 172.33.0.4
+    container_name: tomcat
+    volumes_from:
+    - volumetomcat
+
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    networks:
+      bridge_task2:
+        ipv4_address: 172.33.0.5
+    ports:
+    - "127.0.0.1:80:80"
+    volumes_from:
+    - volumenginx
