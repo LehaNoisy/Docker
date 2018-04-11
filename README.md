@@ -1,5 +1,5 @@
 Useful commands: 
- docker rm /redis                    - remove container
+ docker rm /redis                    - remove container /n
  docker rmi Image                    - remove image
 
  docker run -it ansible /bin/bash    - open ansible container
