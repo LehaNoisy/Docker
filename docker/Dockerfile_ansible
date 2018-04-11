@@ -1,0 +1,6 @@
+FROM python:2.7
+MAINTAINER Aliaksei Shumilau (Aliaksei_Shumilau@epam.com)
+RUN pip install ansible==2.4.3
+ADD playbook.yml /tmp
+RUN ansible-playbook -i "localhost," -c local /tmp/playbook.yml
+
